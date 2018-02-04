@@ -2,7 +2,11 @@ import { Routes } from '@angular/router';
 
 export const APP_ROUTES: Routes = [
   {
-    path: '',
+    path: 'login',
     loadChildren: './login/login.module#LoginModule',
+  }, 
+  {
+    path: '',
+    loadChildren: './home/home.module#HomeModule',
   }
 ];
