@@ -10,7 +10,7 @@ export const APP_ROUTES: Routes = [
     loadChildren: './home/home.module#HomeModule',
   },
   {
-    path: 'battles',
-    loadChildren: './battles/battles.module#BattlesModule',
+    path: 'content',
+    loadChildren: './content/content.module#ContentModule',
   }
 ];
