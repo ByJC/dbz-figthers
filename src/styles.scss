@@ -1,5 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+// @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+// $primary: #f57c00;
+// $accent: #8a2995;
+
+$mat-orange: (
+  50: #f8dabc,
+  100: #f5c697,
+  200: #f1af6d,
+  300: #f5922f,
+  400: #f78615,
+  500: #f57c00,
+  600: #f56e00,
+  700: #f55a00,
+  800: #f54e00,
+  900: #f54500,
+  A100: #ffb08c,
+  A200: #fe9253,
+  A400: #fe8a3d,
+  A700: #fe7130,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$candy-app-primary: mat-palette($mat-orange);
+$candy-app-accent:  mat-palette($mat-purple, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+
 
 * {
     -webkit-font-smoothing: antialiased;

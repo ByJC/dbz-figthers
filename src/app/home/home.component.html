@@ -7,7 +7,8 @@
       </picture>
   
       <div class="home-buttons" fxLayout="row" fxLayout.gt-md="column" fxLayoutAlign="center center">
-        <a mat-raised-button color="primary" [routerLink]="'messages'" aria-label="Get Started" *ngIf="currentUser != null">Get Chatting</a>
+        <a mat-raised-button color="primary" [routerLink]="'battles'" aria-label="Get Started">Let's Battle !</a>
+        <!-- *ngIf="currentUser != null" -->
         <a mat-raised-button color="primary" [routerLink]="'login'" aria-label="Sign in and pour some beer" *ngIf="currentUser == null">Sign In</a>
       </div>
     </div>

@@ -8,5 +8,9 @@ export const APP_ROUTES: Routes = [
   {
     path: '',
     loadChildren: './home/home.module#HomeModule',
+  },
+  {
+    path: 'battles',
+    loadChildren: './battles/battles.module#BattlesModule',
   }
 ];
