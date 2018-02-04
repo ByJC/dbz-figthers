@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Battle } from '../model/battle';
 
 @Component({
@@ -41,16 +41,12 @@ export class BattlesComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(BattlesDialog, {
-      width: '250px',
-      data: { toto: 'tata'}
-    });
+    let dialogRef = this.dialog.open(BattlesDialog);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
     });
   }
-
 }
 
 @Component({
@@ -59,10 +55,7 @@ export class BattlesComponent implements OnInit {
 })
 export class BattlesDialog {
 
-  constructor(public dialogRef: MatDialogRef<BattlesDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-      console.log(this.data);
-    }
+  constructor(public dialogRef: MatDialogRef<BattlesDialog>) {}
 
   onNoClick(): void {
     this.dialogRef.close();
