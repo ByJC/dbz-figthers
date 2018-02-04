@@ -1,9 +1,23 @@
 <div class="battles-wrapper">
-    <div class="battles">
-      <div fxLayout="column" fxLayoutAlign="center center">
-        <h1>Battles</h1>
-  
-        
-      </div>
+  <div class="battles">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <h1>Battles</h1>
+
+      <button color="primary" mat-fab class="add-battle" (click)="openDialog()">+</button>
+
+      <mat-card *ngFor="let battle of battles" style="width:85%">
+        <mat-card-title fxLayout="row" fxLayoutAlign="start center">
+          <div *ngFor="let player of battle.players" fxFlex="50" fxLayout="row" fxLayoutAlign="center center">
+            {{player.name}}
+          </div>
+        </mat-card-title>
+        <mat-card-content fxLayout="row" fxLayoutAlign="start center">
+          <div *ngFor="let player of battle.players" fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
+            <span *ngFor="let warrior of player.warriors">{{warrior.name}}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
     </div>
   </div>
+</div>

@@ -10,7 +10,8 @@ import {
   MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatSelectModule,
   MatSidenavModule, MatSlideToggleModule, MatSnackBarModule, MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatFab
 } from '@angular/material';
 
 @NgModule({

@@ -5,7 +5,11 @@
     font-family: 'Roboto', sans-serif;
   
     .battles {
-      margin: 0 auto;
-      max-width: 248px;
     }
+
+    .add-battle {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+    } 
 }
