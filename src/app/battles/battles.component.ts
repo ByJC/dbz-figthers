@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Battle } from '../model/battle';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import { Warrior } from '../model/warrior';
+
 
 @Component({
   selector: 'app-battles',
@@ -55,7 +59,11 @@ export class BattlesComponent implements OnInit {
 })
 export class BattlesDialog {
 
-  constructor(public dialogRef: MatDialogRef<BattlesDialog>) {}
+  warriors : Observable<any[]>;
+
+  constructor(public dialogRef: MatDialogRef<BattlesDialog>, private db: AngularFirestore) {
+    this.warriors = db.collection('warriors').valueChanges();
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

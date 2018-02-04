@@ -11,21 +11,21 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-select placeholder="Select Warrior 1">
-                    <mat-option *ngFor="let warrior of warriors" [value]="warrior">
+                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
                         {{ warrior.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-select placeholder="Select Warrior 2">
-                    <mat-option *ngFor="let warrior of warriors" [value]="warrior">
+                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
                         {{ warrior.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-select placeholder="Select Warrior 3">
-                    <mat-option *ngFor="let warrior of warriors" [value]="warrior">
+                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
                         {{ warrior.name }}
                     </mat-option>
                 </mat-select>
@@ -41,21 +41,21 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-select placeholder="Select Warrior 1">
-                    <mat-option *ngFor="let warrior of warriors" [value]="warrior">
+                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
                         {{ warrior.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-select placeholder="Select Warrior 2">
-                    <mat-option *ngFor="let warrior of warriors" [value]="warrior">
+                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
                         {{ warrior.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-select placeholder="Select Warrior 3">
-                    <mat-option *ngFor="let warrior of warriors" [value]="warrior">
+                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
                         {{ warrior.name }}
                     </mat-option>
                 </mat-select>
