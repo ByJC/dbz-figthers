@@ -1,5 +1,8 @@
 <h2 mat-dialog-title>Match VS</h2>
 <mat-dialog-content>
+        <form class="person-form"
+        [formGroup]="form"
+        novalidate>
     <mat-tab-group>
         <mat-tab label="Player 1">
             <mat-form-field >
@@ -10,24 +13,28 @@
                 </mat-select>
             </mat-form-field>
 
-            <!-- <mh-tags [source]="warriors" 
-            formControlName="firstPlayerWarriors" ></mh-tags> -->
+            <mh-tags [source]="warriors" 
+            formControlName="firstPlayerWarriors" ></mh-tags>
             
         </mat-tab>
         <mat-tab label="Player 2">
             <mat-form-field >
-                <mat-select placeholder="Select Player 2" [(value)]="battle.secondPlayer">
+                <mat-select placeholder="Select Player 2" formControlName="secondPlayerName">
                     <mat-option *ngFor="let player of players | async" [value]="player" >
                         {{ player.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+
+            <mh-tags [source]="warriors" 
+            formControlName="secondPlayerWarriors" ></mh-tags>
             
         </mat-tab>
     </mat-tab-group>
+    </form>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>No</button>
     <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-    <button mat-button [mat-dialog-close]="true">Submit</button>
+    <button mat-button (click)="submit()">Submit</button>
 </mat-dialog-actions>

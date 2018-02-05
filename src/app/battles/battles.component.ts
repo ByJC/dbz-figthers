@@ -4,7 +4,7 @@ import { Battle } from '../model/battle';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { Warrior } from '../model/warrior';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -29,42 +29,14 @@ export class BattlesComponent implements OnInit {
     this.players = this.db.collection('players').valueChanges();
   }
 
-  add() {
-    this.db.collection('battles').add(
-      {
-        status: 'in progress',
-        firstPlayer: {
-          name: 'Yoann',
-          warriors: [
-            { name: 'Goku' },
-            { name: 'Vegeta' },
-            { name: 'Trunks' }
-          ]
-        },
-        secondPlayer: {
-          name: 'Jieff',
-          warriors: [
-            { name: 'C-18' },
-            { name: 'Cell' },
-            { name: 'Freezer' }
-          ]
-        }
-      }
-    )
-      .then(res =>{
-        console.log("Document successfully written!", res);
-      })
-      .catch(function (error) {
-        console.error("Error writing document: ", error);
-      });
+  add(battle) {
+    this.db.collection('battles').add(battle)
+      .catch(error => console.error("Error writing document: ", error);
   }
 
   openDialog(): void {
     let dialogRef = this.dialog.open(BattlesDialog, { data: { warriors: this.warriors, players: this.players } });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
-    });
+    dialogRef.afterClosed().subscribe(result => this.add(result));
   }
 }
 
@@ -86,12 +58,11 @@ export class BattlesDialog {
       warriors : []
     }
   };
-  form;
+  form: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<BattlesDialog>, private db: AngularFirestore, 
     @Inject(MAT_DIALOG_DATA) public data: any, private _fb: FormBuilder) {
     data.warriors.subscribe(data => this.warriors = data);
-    console.log(this.warriors);
     this.players = data.players;
 
     this.initForm();
@@ -106,10 +77,11 @@ export class BattlesDialog {
     });
 
     this.form.valueChanges
-      .debounceTime(300)
-      .distinctUntilChanged()
       .subscribe((data) => {
-        console.log(data);
+        this.battle.firstPlayer.name = data.firstPlayerName.name;
+        this.battle.firstPlayer.warriors = data.firstPlayerWarriors;
+        this.battle.secondPlayer.name = data.secondPlayerName.name;
+        this.battle.secondPlayer.warriors = data.secondPlayerWarriors;
       });
   }
 
@@ -118,7 +90,8 @@ export class BattlesDialog {
   }
 
   submit() {
-    this.dialogRef.close();
+    // console.log(this.battle);
+    this.dialogRef.close(this.battle);
   }
 
 }

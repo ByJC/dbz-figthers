@@ -12,7 +12,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { AuthModule } from './auth/auth.module';
-import { TagComponent } from './tag/tag.component';
+// import { TagComponent } from './tag/tag.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const config = {
@@ -26,7 +26,7 @@ const config = {
 
 @NgModule({
   declarations: [
-    AppComponent, TagComponent
+    AppComponent //, TagComponent
   ],
   imports: [
     BrowserModule,

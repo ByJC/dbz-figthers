@@ -7,10 +7,12 @@ import { RouterModule } from '@angular/router';
 import { BattlesComponent } from '../battles/battles.component';
 import { BattlesDialog } from '../battles/battles.component';
 import { CONTENT_ROUTES } from './content.routes';
+import { TagComponent } from '../tag/tag.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
-    CommonModule, MatModule, FlexLayoutModule,
+    CommonModule, MatModule, FlexLayoutModule,ReactiveFormsModule,
     RouterModule.forChild(
       [
         {
@@ -27,7 +29,7 @@ import { CONTENT_ROUTES } from './content.routes';
     ]
     )
   ],
-  declarations: [ContentComponent, BattlesComponent,BattlesDialog], 
+  declarations: [ContentComponent, BattlesComponent,BattlesDialog, TagComponent], 
   entryComponents : [BattlesDialog]
 })
 export class ContentModule { }

@@ -1,7 +1,7 @@
 <mat-form-field fxFlex="100">
     <mat-chip-list #chipList>
       <mat-chip *ngFor="let tag of _value" (remove)="remove(tag)">
-        {{tag.name}} <mat-icon matChipRemove>cancel</mat-icon>
+        {{tag.name}} <mat-icon matChipRemove>x</mat-icon>
       </mat-chip>
       <input [matChipInputFor]="chipList"
              [matChipInputAddOnBlur]="false"

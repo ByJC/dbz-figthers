@@ -58,7 +58,7 @@ export class TagComponent implements ControlValueAccessor {
     }
 
     sourceFiltered(): Tag[] {
-        return arrayDiffObj(this.source, this._value, 'id');
+        return this.source ? arrayDiffObj(this.source, this._value, 'id') : this.source;
     }
 
     registerOnChange(fn: (_: any) => void ): void { this.onChange = fn; }
