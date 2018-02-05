@@ -2,64 +2,27 @@
 <mat-dialog-content>
     <mat-tab-group>
         <mat-tab label="Player 1">
-            <mat-form-field>
-                <mat-select placeholder="Select Player 1">
-                    <mat-option *ngFor="let player of players" [value]="player">
+            <mat-form-field >
+                <mat-select placeholder="Select Player 1" formControlName="firstPlayerName">
+                    <mat-option *ngFor="let player of players | async" [value]="player" >
                         {{ player.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field>
-                <mat-select placeholder="Select Warrior 1">
-                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
-                        {{ warrior.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-select placeholder="Select Warrior 2">
-                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
-                        {{ warrior.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-select placeholder="Select Warrior 3">
-                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
-                        {{ warrior.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+
+            <!-- <mh-tags [source]="warriors" 
+            formControlName="firstPlayerWarriors" ></mh-tags> -->
+            
         </mat-tab>
         <mat-tab label="Player 2">
-            <mat-form-field>
-                <mat-select placeholder="Select Player 2">
-                    <mat-option *ngFor="let player of players" [value]="player">
+            <mat-form-field >
+                <mat-select placeholder="Select Player 2" [(value)]="battle.secondPlayer">
+                    <mat-option *ngFor="let player of players | async" [value]="player" >
                         {{ player.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field>
-                <mat-select placeholder="Select Warrior 1">
-                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
-                        {{ warrior.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-select placeholder="Select Warrior 2">
-                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
-                        {{ warrior.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-select placeholder="Select Warrior 3">
-                    <mat-option *ngFor="let warrior of warriors | async" [value]="warrior">
-                        {{ warrior.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+            
         </mat-tab>
     </mat-tab-group>
 </mat-dialog-content>

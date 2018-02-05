@@ -5,15 +5,21 @@
 
       <button color="primary" mat-fab class="add-battle" (click)="openDialog()">+</button>
 
-      <mat-card *ngFor="let battle of battles" style="width:85%">
+      <mat-card *ngFor="let battle of battles | async" style="width:85%">
         <mat-card-title fxLayout="row" fxLayoutAlign="start center">
-          <div *ngFor="let player of battle.players" fxFlex="50" fxLayout="row" fxLayoutAlign="center center">
-            {{player.name}}
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="center center">
+            {{battle.firstPlayer.name}}
+          </div>
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="center center">
+            {{battle.secondPlayer.name}}
           </div>
         </mat-card-title>
         <mat-card-content fxLayout="row" fxLayoutAlign="start center">
-          <div *ngFor="let player of battle.players" fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
-            <span *ngFor="let warrior of player.warriors">{{warrior.name}}</span>
+          <div fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
+            <span *ngFor="let warrior of battle.firstPlayer.warriors">{{warrior.name}}</span>
+          </div>
+          <div fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
+            <span *ngFor="let warrior of battle.secondPlayer.warriors">{{warrior.name}}</span>
           </div>
         </mat-card-content>
       </mat-card>

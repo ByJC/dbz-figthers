@@ -12,6 +12,8 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { AuthModule } from './auth/auth.module';
+import { TagComponent } from './tag/tag.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const config = {
   apiKey: "AIzaSyBXAVB9ciUchzupead3EED2f5L5kLPeKW8",
@@ -24,11 +26,12 @@ const config = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, TagComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule, ReactiveFormsModule,
     MatModule,
     AuthModule,
     AngularFireModule.initializeApp(config),

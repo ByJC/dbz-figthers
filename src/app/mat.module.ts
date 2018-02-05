@@ -11,9 +11,9 @@ import {
   MatSidenavModule, MatSlideToggleModule, MatSnackBarModule, MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatFab
+  MatFab,
+  MatChipsModule
 } from '@angular/material';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -35,7 +35,8 @@ import {
     MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatChipsModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -56,7 +57,8 @@ import {
     MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatChipsModule
   ],
 })
 export class MatModule { }
