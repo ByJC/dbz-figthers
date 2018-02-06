@@ -31,7 +31,7 @@ export class BattlesComponent implements OnInit {
 
   add(battle) {
     this.db.collection('battles').add(battle)
-      .catch(error => console.error("Error writing document: ", error);
+      .catch(error => console.error("Error writing document: ", error));
   }
 
   openDialog(): void {
