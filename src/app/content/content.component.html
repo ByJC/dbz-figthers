@@ -11,11 +11,12 @@
   <mat-sidenav #sidenav mode="side" opened="false" [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
     fixedTopGap="56">
     <mat-nav-list>
-        <a mat-list-item routerLink="." >Battles</a>
+        <a mat-list-item [routerLink]="" routerLinkActive="active" >Battles</a>
+        <a mat-list-item [routerLink]="[{outlets: {content: ['ranking']}}]" routerLinkActive="active">Ranking</a>
         <a mat-list-item [routerLink]="'login'" >Sign In</a>
     </mat-nav-list>
   </mat-sidenav>
-  <router-outlet name="content"></router-outlet>
+  
 
-  <!-- <mat-sidenav-content>Main content</mat-sidenav-content> -->
+  <mat-sidenav-content><router-outlet name="content"></router-outlet></mat-sidenav-content>
 </mat-sidenav-container>

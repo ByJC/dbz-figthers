@@ -6,11 +6,11 @@ export const APP_ROUTES: Routes = [
     loadChildren: './login/login.module#LoginModule',
   }, 
   {
-    path: '',
+    path: 'home',
     loadChildren: './home/home.module#HomeModule',
   },
   {
-    path: 'content',
+    path: '',
     loadChildren: './content/content.module#ContentModule',
   }
 ];

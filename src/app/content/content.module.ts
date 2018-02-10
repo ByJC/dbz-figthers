@@ -6,12 +6,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { BattlesComponent } from '../battles/battles.component';
 import { BattlesDialog } from '../battles/battles.component';
-import { CONTENT_ROUTES } from './content.routes';
 import { TagComponent } from '../tag/tag.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BattlesPipe } from '../battles/battles.pipe';
 import { BattleComponent } from '../battles/battle/battle.component';
 import { PlayerComponent } from '../battles/player/player.component';
+import { RankingComponent } from '../ranking/ranking.component';
 
 @NgModule({
   imports: [
@@ -22,9 +22,15 @@ import { PlayerComponent } from '../battles/player/player.component';
             path: '',
             component: ContentComponent,
             children: [
+                // {
+                //     path: '',
+                //     component: BattlesComponent,
+                //     outlet: 'content'
+                // },
                 {
                     path: '',
-                    component: BattlesComponent,
+                    component: RankingComponent,
+                    // loadChildren: '../ranking/ranking.module#RankingtModule',
                     outlet: 'content'
                 }
             ]
@@ -32,7 +38,7 @@ import { PlayerComponent } from '../battles/player/player.component';
     ]
     )
   ],
-  declarations: [ContentComponent, BattlesComponent, BattlesDialog, TagComponent, BattlesPipe, BattleComponent, PlayerComponent], 
+  declarations: [ContentComponent, BattlesComponent, BattlesDialog, TagComponent, BattlesPipe, BattleComponent, PlayerComponent , RankingComponent], 
   entryComponents : [BattlesDialog]
 })
 export class ContentModule { }

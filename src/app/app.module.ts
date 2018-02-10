@@ -26,7 +26,7 @@ const config = {
 
 @NgModule({
   declarations: [
-    AppComponent //, TagComponent,
+    AppComponent
 ],
   imports: [
     BrowserModule,
