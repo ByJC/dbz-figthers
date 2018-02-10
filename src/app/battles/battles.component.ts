@@ -56,6 +56,17 @@ export class BattlesComponent implements OnInit {
     });
   }
 
+  deleteBattle(battle) {
+    this.db.collection('battles').doc(battle.id)
+    .delete()
+    .then(() => {
+      console.log("Document successfully updated!");
+    })
+    .catch(error => {
+      console.error("Error updating document: ", error);
+    });
+  }
+
   openDialog(): void {
     let dialogRef = this.dialog.open(BattlesDialog, { data: { warriors: this.warriors, players: this.players } });
     dialogRef.afterClosed().subscribe(result => this.add(result));
@@ -71,6 +82,7 @@ export class BattlesDialog {
   warriors;
   players;
   battle = {
+    isFinish: false,
     date: new Date(),
     firstPlayer: {
       name: '',

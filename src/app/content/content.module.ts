@@ -9,6 +9,9 @@ import { BattlesDialog } from '../battles/battles.component';
 import { CONTENT_ROUTES } from './content.routes';
 import { TagComponent } from '../tag/tag.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BattlesPipe } from '../battles/battles.pipe';
+import { BattleComponent } from '../battles/battle/battle.component';
+import { PlayerComponent } from '../battles/player/player.component';
 
 @NgModule({
   imports: [
@@ -29,7 +32,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ]
     )
   ],
-  declarations: [ContentComponent, BattlesComponent,BattlesDialog, TagComponent], 
+  declarations: [ContentComponent, BattlesComponent, BattlesDialog, TagComponent, BattlesPipe, BattleComponent, PlayerComponent], 
   entryComponents : [BattlesDialog]
 })
 export class ContentModule { }

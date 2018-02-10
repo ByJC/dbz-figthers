@@ -1,34 +1,19 @@
 <div class="battles-wrapper">
   <div class="battles">
     <div fxLayout="column" fxLayoutAlign="center center">
-      <!-- <h1>Battles</h1> -->
 
       <button color="primary" mat-fab class="add-battle" (click)="openDialog()">+</button>
 
-      <div *ngFor="let battle of battles | async" style="width:85%; margin:5px;">
-        <div>{{battle.date | date}}</div>
-        <div fxLayout="row">
-          <mat-card fxFlex="50" fxLayout="column" fxLayoutAlign="center center" (click)="selectWinner(battle, 'firstPlayer');" [ngClass]="{
-            'winner': battle.firstPlayer.winner === true,
-            'loser': battle.firstPlayer.winner === false}">
-            <mat-card-title fxLayout="row" fxLayoutAlign="start center" >
-              {{battle.firstPlayer.name}}
-            </mat-card-title>
-            <mat-card-content fxLayout="row" fxLayoutAlign="start center">
-              <span *ngFor="let warrior of battle.firstPlayer.warriors">{{warrior.name}}</span>
-            </mat-card-content>
-          </mat-card>
-          <mat-card fxFlex="50" fxLayout="column" fxLayoutAlign="center center" (click)="selectWinner(battle, 'secondPlayer');" [ngClass]="{
-            'winner': battle.secondPlayer.winner === true,
-            'loser': battle.secondPlayer.winner === false}">
-            <mat-card-title fxLayout="row" fxLayoutAlign="start center" >
-              {{battle.secondPlayer.name}}
-            </mat-card-title>
-            <mat-card-content fxLayout="row" fxLayoutAlign="start center">
-              <span *ngFor="let warrior of battle.secondPlayer.warriors">{{warrior.name}}</span>
-            </mat-card-content>
-          </mat-card>
-        </div>
+      In Progress 
+
+      <div *ngFor="let battle of battles | async | battlesPipe : {isFinish: false}" style="width:85%; margin:5px;">
+          <battle-item [battle]="battle"></battle-item>
+      </div>
+
+      Done
+
+      <div *ngFor="let battle of battles | async | battlesPipe : {isFinish: true}" style="width:85%; margin:5px;">
+          <battle-item [battle]="battle"></battle-item>
       </div>
     </div>
   </div>
