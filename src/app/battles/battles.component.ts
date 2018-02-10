@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Battle } from '../model/battle';
-import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { Warrior } from '../model/warrior';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { FirebaseService } from '../shared/firebase.service';
+
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -17,38 +18,21 @@ import 'rxjs/add/operator/distinctUntilChanged';
 })
 export class BattlesComponent implements OnInit {
 
-  battles: any = [];
+  battles: any;
   warriors: any;
   players: any;
 
-  constructor(public dialog: MatDialog, private db: AngularFirestore) {}
+  constructor(public dialog: MatDialog, private fb: FirebaseService) {}
 
   ngOnInit() {
-    this.battles = this.db.collection('battles').snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    });
-    this.warriors = this.db.collection('warriors').valueChanges();
-    this.players = this.db.collection('players').valueChanges();
+    this.battles = this.fb.getBattles();
+    this.warriors = this.fb.getWarriors();
+    this.players = this.fb.getPlayers();
   }
 
   add(battle) {
-    this.db.collection('battles').add(battle)
+    this.fb.addBattle(battle)
       .catch(error => console.error("Error writing document: ", error));
-  }
-
-  deleteBattle(battle) {
-    this.db.collection('battles').doc(battle.id)
-    .delete()
-    .then(() => {
-      console.log("Document successfully updated!");
-    })
-    .catch(error => {
-      console.error("Error updating document: ", error);
-    });
   }
 
   openDialog(): void {
@@ -79,7 +63,7 @@ export class BattlesDialog {
   };
   form: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<BattlesDialog>, private db: AngularFirestore, 
+  constructor(public dialogRef: MatDialogRef<BattlesDialog>, 
     @Inject(MAT_DIALOG_DATA) public data: any, private _fb: FormBuilder) {
     data.warriors.subscribe(data => this.warriors = data);
     this.players = data.players;

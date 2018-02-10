@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { FirebaseService } from '../shared/firebase.service';
+
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/observable/zip";
 
@@ -11,29 +12,17 @@ import "rxjs/add/observable/zip";
 export class RankingComponent implements OnInit {
 
   battles:any;
-  ObservablesBattles;
   players:any;
-  ObservablesPlayers;
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private fb: FirebaseService) {}
 
   ngOnInit() {
-    this.ObservablesBattles = this.db.collection('battles').snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    });
-    this.ObservablesPlayers = this.db.collection('players').valueChanges();
-
     Observable
-      .zip(this.ObservablesBattles, this.ObservablesPlayers)
+      .zip(this.fb.getBattles(), this.fb.getPlayers())
       .subscribe(this.setVictoryDefeatPlayers.bind(this));
   }
 
   setVictoryDefeatPlayers([battles, players]) {
-
     this.players = players.map(player => {
 
       player.victory = battles.filter(battle => 

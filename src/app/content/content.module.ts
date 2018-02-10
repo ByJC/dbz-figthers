@@ -22,17 +22,17 @@ import { RankingComponent } from '../ranking/ranking.component';
             path: '',
             component: ContentComponent,
             children: [
-                // {
-                //     path: '',
-                //     component: BattlesComponent,
-                //     outlet: 'content'
-                // },
                 {
                     path: '',
-                    component: RankingComponent,
-                    // loadChildren: '../ranking/ranking.module#RankingtModule',
+                    component: BattlesComponent,
                     outlet: 'content'
-                }
+                },
+                // {
+                //     path: '',
+                //     component: RankingComponent,
+                //     // loadChildren: '../ranking/ranking.module#RankingtModule',
+                //     outlet: 'content'
+                // }
             ]
         }
     ]

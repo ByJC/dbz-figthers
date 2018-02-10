@@ -1,32 +1,29 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { Component, Input } from '@angular/core';
+import { FirebaseService } from '../../shared/firebase.service';
 
 @Component({
   selector: 'battle-item',
   templateUrl: './battle.component.html',
   styleUrls: ['./battle.component.scss']
 })
-export class BattleComponent implements OnInit {
+export class BattleComponent {
   @Input() battle: any;
-  constructor(private db: AngularFirestore) { }
-
-  ngOnInit() {
-
-  }
+  constructor(private fb: FirebaseService) { }
 
   selectWinner(battle, player) {
-    let battleToUpdate = this.db.collection('battles').doc(battle.id);
 
-    battleToUpdate.update({
+    const dataToBeUpdated = {
       "isFinish": true,
       "firstPlayer.winner": (player === "firstPlayer"),
       "secondPlayer.winner": (player === "secondPlayer")
-    })
-    .then(() => {
-      console.log("Document successfully updated!");
-    })
-    .catch(error => {
-      console.error("Error updating document: ", error);
-    });
+    };
+
+    this.fb.updateBattle(battle, dataToBeUpdated)
+      .then(() => {
+        console.log("Document successfully updated!");
+      })
+      .catch(error => {
+        console.error("Error updating document: ", error);
+      });
   }
 }
