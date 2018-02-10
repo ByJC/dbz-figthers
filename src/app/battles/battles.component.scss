@@ -11,5 +11,16 @@
         position: absolute;
         bottom: 20px;
         right: 20px;
-    } 
+    }
+
+    mat-card{
+        padding: 8px;
+    }
+
+    .winner {
+        border:1px solid rgb(91, 180, 98)
+    }
+    .loser {
+        border:1px solid rgb(204, 118, 48)
+    }
 }

@@ -24,7 +24,13 @@ export class BattlesComponent implements OnInit {
   constructor(public dialog: MatDialog, private db: AngularFirestore) {}
 
   ngOnInit() {
-    this.battles = this.db.collection('battles').valueChanges();
+    this.battles = this.db.collection('battles').snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    });
     this.warriors = this.db.collection('warriors').valueChanges();
     this.players = this.db.collection('players').valueChanges();
   }
@@ -32,6 +38,22 @@ export class BattlesComponent implements OnInit {
   add(battle) {
     this.db.collection('battles').add(battle)
       .catch(error => console.error("Error writing document: ", error));
+  }
+
+  selectWinner(battle, player) {
+    let battleToUpdate = this.db.collection('battles').doc(battle.id);
+
+    battleToUpdate.update({
+      "isFinish": true,
+      "firstPlayer.winner": (player === "firstPlayer"),
+      "secondPlayer.winner": (player === "secondPlayer")
+    })
+    .then(() => {
+      console.log("Document successfully updated!");
+    })
+    .catch(error => {
+      console.error("Error updating document: ", error);
+    });
   }
 
   openDialog(): void {
@@ -49,6 +71,7 @@ export class BattlesDialog {
   warriors;
   players;
   battle = {
+    date: new Date(),
     firstPlayer: {
       name: '',
       warriors : []
@@ -90,7 +113,7 @@ export class BattlesDialog {
   }
 
   submit() {
-    // console.log(this.battle);
+    this.battle.date = new Date();
     this.dialogRef.close(this.battle);
   }
 
