@@ -4,4 +4,9 @@
 
 player-item {
     display: inline-flex;
+    cursor:pointer;
+}
+
+player-item:hover {
+    box-shadow: 4px 4px 4px #dad4d4;
 }

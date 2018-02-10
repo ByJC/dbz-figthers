@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="center center">
-  <div fxFlex="20" class="battle-date"fxLayout="row" fxLayoutAlign="center center"><h4>{{battle.date | date}}</h4></div>
+  <div fxFlex="20" class="battle-date"fxLayout="row" fxLayoutAlign="center center"><h4>{{battle.date | date:'short'}}</h4></div>
   <player-item fxFlex="40" [player]="battle.firstPlayer" (click)="selectWinner(battle, 'firstPlayer');"></player-item>
   <player-item  fxFlex="40" [player]="battle.secondPlayer" (click)="selectWinner(battle, 'secondPlayer');"></player-item>
 </div>

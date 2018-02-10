@@ -40,22 +40,6 @@ export class BattlesComponent implements OnInit {
       .catch(error => console.error("Error writing document: ", error));
   }
 
-  selectWinner(battle, player) {
-    let battleToUpdate = this.db.collection('battles').doc(battle.id);
-
-    battleToUpdate.update({
-      "isFinish": true,
-      "firstPlayer.winner": (player === "firstPlayer"),
-      "secondPlayer.winner": (player === "secondPlayer")
-    })
-    .then(() => {
-      console.log("Document successfully updated!");
-    })
-    .catch(error => {
-      console.error("Error updating document: ", error);
-    });
-  }
-
   deleteBattle(battle) {
     this.db.collection('battles').doc(battle.id)
     .delete()
