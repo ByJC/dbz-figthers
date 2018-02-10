@@ -1,15 +1,20 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
     <span>Let's Battle !</span>
   </mat-toolbar-row>
 </mat-toolbar>
 
 <mat-sidenav-container class="app-sidenav-container">
-  <mat-sidenav  #sidenav mode="side" opened="false"
-    [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"
-                 >Sidenav content</mat-sidenav>
+  <mat-sidenav #sidenav mode="side" opened="false" [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+    fixedTopGap="56">
+    <mat-nav-list>
+        <a mat-list-item routerLink="." >Battles</a>
+        <a mat-list-item [routerLink]="'login'" >Sign In</a>
+    </mat-nav-list>
+  </mat-sidenav>
   <router-outlet name="content"></router-outlet>
 
   <!-- <mat-sidenav-content>Main content</mat-sidenav-content> -->
