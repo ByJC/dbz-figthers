@@ -14,6 +14,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
+// import { ContentModule } from './content/content.module';
 
 const config = {
   apiKey: "AIzaSyBXAVB9ciUchzupead3EED2f5L5kLPeKW8",
@@ -35,6 +36,7 @@ const config = {
     MatModule,
     AuthModule,
     SharedModule,
+    // ContentModule,
     AngularFireModule.initializeApp(config),
     RouterModule.forRoot(APP_ROUTES)
   ],

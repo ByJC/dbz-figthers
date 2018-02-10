@@ -27,12 +27,12 @@ import { RankingComponent } from '../ranking/ranking.component';
                     component: BattlesComponent,
                     outlet: 'content'
                 },
-                // {
-                //     path: '',
-                //     component: RankingComponent,
-                //     // loadChildren: '../ranking/ranking.module#RankingtModule',
-                //     outlet: 'content'
-                // }
+                {
+                    path: 'ranking',
+                    component: RankingComponent,
+                    // loadChildren: '../ranking/ranking.module#RankingtModule',
+                    outlet: 'content'
+                }
             ]
         }
     ]
