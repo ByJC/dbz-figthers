@@ -6,6 +6,10 @@ export class FirebaseService {
 
     constructor(private db: AngularFirestore) { }
 
+    /** 
+     * In order to update the battle document, I need to catch the id of the document using snapshotChanges()
+     * then merge the data and id into one object
+    */
     getBattles() {
         return this.db.collection('battles').snapshotChanges().map(actions => {
             return actions.map(a => {

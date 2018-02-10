@@ -1,6 +1,6 @@
-<div class="player" fxLayout="row" fxLayoutAlign="center center" [ngClass]="{
+<div class="player" fxLayout="column" fxLayoutAlign="center center" [ngClass]="{
   'winner': player.winner === true,
   'loser': player.winner === false}">
   <div><h4>{{player.name}}</h4></div>
-  <div><span *ngFor="let warrior of player.warriors">{{warrior.name}}</span></div>
+  <div><span style="margin-right:5px;" *ngFor="let warrior of player.warriors">{{warrior.name}}</span></div>
 </div>
