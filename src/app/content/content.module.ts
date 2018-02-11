@@ -24,14 +24,12 @@ import { RankingComponent } from '../ranking/ranking.component';
             children: [
                 {
                     path: '',
-                    component: BattlesComponent,
-                    outlet: 'content'
+                    component: BattlesComponent
                 },
                 {
                     path: 'ranking',
                     component: RankingComponent,
-                    // loadChildren: '../ranking/ranking.module#RankingtModule',
-                    outlet: 'content'
+                    // // loadChildren: '../ranking/ranking.module#RankingtModule',
                 }
             ]
         }
