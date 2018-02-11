@@ -29,7 +29,7 @@ import { RankingComponent } from '../ranking/ranking.component';
                 {
                     path: 'ranking',
                     component: RankingComponent,
-                    // // loadChildren: '../ranking/ranking.module#RankingtModule',
+                    // loadChildren: '../ranking/ranking.module#RankingModule',
                 }
             ]
         }
