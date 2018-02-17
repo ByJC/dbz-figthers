@@ -14,3 +14,11 @@ player-item:hover {
 .battle-item {
     background-color: white;
 }
+
+.isDisabled{
+    cursor: not-allowed;
+}
+.isDisabled:hover{
+    cursor: not-allowed;
+    box-shadow: none;
+}
