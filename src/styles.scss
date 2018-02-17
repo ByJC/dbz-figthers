@@ -49,7 +49,7 @@ $mat-orange: (
 );
 
 $candy-app-primary: mat-palette($mat-orange);
-$candy-app-accent:  mat-palette($mat-purple, A200, A100, A400);
+$candy-app-accent:  mat-palette($mat-purple);
 
 // The warn palette is optional (defaults to red).
 $candy-app-warn:    mat-palette($mat-red);

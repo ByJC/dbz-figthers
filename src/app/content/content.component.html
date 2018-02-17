@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <button mat-icon-button (click)="sidenav.toggle()">
+    <button mat-icon-button (click)="sidenav.toggle()" *ngIf="mobileQuery.matches">
       <mat-icon>menu</mat-icon>
     </button>
     <span>Let's Battle !</span>
@@ -8,7 +8,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="app-sidenav-container">
-  <mat-sidenav #sidenav mode="side" opened="false" [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+  <mat-sidenav #sidenav mode="side" opened="false" [mode]="'over'" [fixedInViewport]="mobileQuery.matches"
     fixedTopGap="56">
     <mat-nav-list>
         <a mat-list-item routerLink="/" >Battles</a>
@@ -18,5 +18,27 @@
   </mat-sidenav>
   
 
-  <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content>
+  <mat-sidenav-content>
+    <router-outlet>
+        <nav mat-tab-nav-bar color="primary" *ngIf="!mobileQuery.matches">
+            <a mat-tab-link
+               routerLink="/battles"
+               routerLinkActive #rla="routerLinkActive"
+               [active]="rla.isActive">
+              Battles 
+            </a>
+            <a mat-tab-link
+               routerLink="/ranking"
+               routerLinkActive #rla="routerLinkActive"
+               [active]="rla.isActive">
+              Ranking 
+            </a>
+            <a mat-tab-link
+               routerLink="/login"
+               routerLinkActive #rla="routerLinkActive"
+               [active]="rla.isActive">
+              Sign In 
+            </a>
+          </nav>
+        </router-outlet></mat-sidenav-content>
 </mat-sidenav-container>
