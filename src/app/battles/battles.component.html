@@ -1,18 +1,18 @@
 <div class="battles-wrapper">
   <div class="battles">
-    <div fxLayout="column" fxLayoutAlign="center center">
+    <div flex fxLayout="column">
 
       <button color="accent" mat-fab class="add-battle" (click)="createBattle()">+</button>
 
       In Progress 
 
-      <div *ngFor="let battle of battles | async | battlesPipe : {isFinish: false}" style="width:85%; margin:5px;">
+      <div fxFlex class="battle" *ngFor="let battle of battles | async | battlesPipe : {isFinish: false}">
           <battle-item [battle]="battle"></battle-item>
       </div>
 
       Done
 
-      <div *ngFor="let battle of battles | async | battlesPipe : {isFinish: true}" style="width:85%; margin:5px;">
+      <div fxFlex class="battle" *ngFor="let battle of battles | async | battlesPipe : {isFinish: true}">
           <battle-item [battle]="battle"></battle-item>
       </div>
     </div>

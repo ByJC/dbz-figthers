@@ -1,31 +1,29 @@
 <form class="person-form" [formGroup]="form" novalidate>
-  <mat-tab-group>
-    <mat-tab label="Player 1">
-      <mat-form-field>
-        <mat-select placeholder="Select Player 1" formControlName="firstPlayerName">
-          <mat-option *ngFor="let player of players | async" [value]="player">
-            {{ player.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+  <div class="battleform-container" fxLayout="row">
+    <div fxFlex class="battleform-player">
+      <mat-select placeholder="Select Player 1" formControlName="firstPlayerName" required>
+        <mat-option *ngFor="let player of players | async" [value]="player">
+          {{ player.name }}
+        </mat-option>
+      </mat-select>
+      <mat-select class="warriors" placeholder="Warriors" [formControl]="firstPlayerWarriors" multiple required>
+        <mat-option *ngFor="let warrior of warriors" [value]="warrior">{{warrior.name}}</mat-option>
+      </mat-select>
+    </div>
+    <div fxFlex class="battleform-player">
+      <mat-select placeholder="Select Player 2" formControlName="secondPlayerName" required>
+        <mat-option *ngFor="let player of players | async" [value]="player">
+          {{ player.name }}
+        </mat-option>
+      </mat-select>
 
-      <mh-tags [source]="warriors" formControlName="firstPlayerWarriors"></mh-tags>
-
-    </mat-tab>
-    <mat-tab label="Player 2">
-      <mat-form-field>
-        <mat-select placeholder="Select Player 2" formControlName="secondPlayerName">
-          <mat-option *ngFor="let player of players | async" [value]="player">
-            {{ player.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mh-tags [source]="warriors" formControlName="secondPlayerWarriors"></mh-tags>
-
-    </mat-tab>
-  </mat-tab-group>
+      <mat-select class="warriors" placeholder="Warriors" [formControl]="secondPlayerWarriors" multiple required>
+        <mat-option *ngFor="let warrior of warriors" [value]="warrior">{{warrior.name}}</mat-option>
+      </mat-select>
+    </div>
+  </div>
+  <div class="battleform-button" fxLayout="row" fxLayoutAlign="center center">
+    <button mat-button mat-raised-button (click)="cancel()">Cancel</button>
+    <button mat-button mat-raised-button color="accent" (click)="submit()">Submit</button>
+  </div>
 </form>
-<button mat-button>No</button>
-<!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-<button mat-button (click)="submit()">Submit</button>

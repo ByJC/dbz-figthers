@@ -60,4 +60,8 @@ export class BattleformComponent implements OnInit {
       .catch(error => console.error("Error writing document: ", error));
   }
 
+  cancel() {
+    this.router.navigate(['battles']);
+  }
+
 }

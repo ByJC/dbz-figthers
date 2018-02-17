@@ -12,7 +12,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatFab,
-  MatChipsModule
+  MatChipsModule, MatGridListModule
 } from '@angular/material';
 @NgModule({
   imports: [
@@ -36,7 +36,7 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatChipsModule
+    MatChipsModule, MatGridListModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -58,7 +58,8 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatChipsModule
+    MatChipsModule,
+    MatGridListModule
   ],
 })
 export class MatModule { }
