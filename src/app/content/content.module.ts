@@ -12,6 +12,7 @@ import { BattlesPipe } from '../battles/battles.pipe';
 import { BattleComponent } from '../battles/battle/battle.component';
 import { PlayerComponent } from '../battles/player/player.component';
 import { RankingComponent } from '../ranking/ranking.component';
+import { BattleformComponent } from '../battles/battleform/battleform.component';
 
 @NgModule({
   imports: [
@@ -22,9 +23,18 @@ import { RankingComponent } from '../ranking/ranking.component';
             path: '',
             component: ContentComponent,
             children: [
-                {
+                {   
                     path: '',
+                    redirectTo: '/battles',
+                    pathMatch: 'full'
+                },
+                {
+                    path: 'battles',
                     component: BattlesComponent
+                },
+                {
+                    path: 'battles/create',
+                    component: BattleformComponent
                 },
                 {
                     path: 'ranking',
@@ -35,7 +45,8 @@ import { RankingComponent } from '../ranking/ranking.component';
     ]
     )
   ],
-  declarations: [ContentComponent, BattlesComponent, BattlesDialog, TagComponent, BattlesPipe, BattleComponent, PlayerComponent , RankingComponent], 
+  declarations: [ContentComponent, BattlesComponent, BattlesDialog, TagComponent, BattlesPipe, 
+    BattleComponent, PlayerComponent , RankingComponent, BattleformComponent], 
   entryComponents : [BattlesDialog]
 })
 export class ContentModule { }

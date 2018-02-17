@@ -9,6 +9,7 @@ import { FirebaseService } from '../shared/firebase.service';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class BattlesComponent implements OnInit {
   warriors: any;
   players: any;
 
-  constructor(public dialog: MatDialog, private fb: FirebaseService) {}
+  constructor(public dialog: MatDialog, private fb: FirebaseService, private router: Router) {}
 
   ngOnInit() {
     this.battles = this.fb.getBattles();
@@ -33,6 +34,10 @@ export class BattlesComponent implements OnInit {
   add(battle) {
     this.fb.addBattle(battle)
       .catch(error => console.error("Error writing document: ", error));
+  }
+
+  createBattle() {
+    this.router.navigate(['/battles/create']);
   }
 
   openDialog(): void {
