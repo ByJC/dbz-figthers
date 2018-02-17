@@ -1,13 +1,25 @@
-<div class="battles-wrapper">
-    <div class="battles">
-      <div fxLayout="column" fxLayoutAlign="center center">
-
-        <div *ngFor="let player of players" fxLayout="row" style="width:85%; margin:5px;">
-          <div fxFlex=20>{{player.name}}</div>
-          <div fxFlex=40><mat-icon>mood</mat-icon>{{player.victory}}</div>
-          <div fxFlex=40><mat-icon>mood_bad</mat-icon>{{player.defeat}}</div>
-        </div>
+<div class="ranking-container">
+  <mat-table #table [dataSource]="playersDataSource">
   
-      </div>
-    </div>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="victory">
+        <mat-header-cell *matHeaderCellDef> Nb. of Victory </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.victory}} </mat-cell>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="defeat">
+        <mat-header-cell *matHeaderCellDef> Nb. of Defeat </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.defeat}} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
   </div>

@@ -4,6 +4,8 @@ import { FirebaseService } from '../shared/firebase.service';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/observable/zip";
 
+import { MatTableDataSource } from '@angular/material'; 
+
 @Component({
   selector: 'app-ranking',
   templateUrl: './ranking.component.html',
@@ -13,7 +15,8 @@ export class RankingComponent implements OnInit {
 
   battles:any;
   players:any;
-
+  playersDataSource;
+  displayedColumns = ['name', 'victory', 'defeat'];
   constructor(private fb: FirebaseService) {}
 
   ngOnInit() {
@@ -35,6 +38,8 @@ export class RankingComponent implements OnInit {
 
       return player;
     });
+    this.playersDataSource = new MatTableDataSource(this.players);
+    console.log(this.players, this.playersDataSource);
   }
 
 }
