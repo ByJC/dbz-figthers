@@ -1,5 +1,5 @@
 <form class="person-form" [formGroup]="form" novalidate>
-  <div class="battleform-container" fxLayout="row">
+  <div class="battleform-container" fxLayout="row" fxLayout.xs="column">
     <div fxFlex class="battleform-player">
       <mat-select placeholder="Select Player 1" formControlName="firstPlayerName" required>
         <mat-option *ngFor="let player of players | async" [value]="player">

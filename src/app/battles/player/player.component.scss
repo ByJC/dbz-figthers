@@ -9,3 +9,9 @@
     background-color: white;
     width:100%;
 }
+
+@media screen and (max-width: 600px) {
+    .warriors {
+        display:none !important;
+    }
+}
