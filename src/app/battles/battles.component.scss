@@ -11,4 +11,10 @@
     .battle {
         margin: 3px 0px;
     }
+
+    @media screen and (max-width: 600px) {
+        .add-battle {
+            top: 26px;
+        }
+    }
 }
