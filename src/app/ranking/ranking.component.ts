@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import "rxjs/add/observable/zip";
 
 import { MatTableDataSource } from '@angular/material'; 
+import { ProgressBarService } from '../progressbar/progressbar.service';
 
 @Component({
   selector: 'app-ranking',
@@ -17,9 +18,10 @@ export class RankingComponent implements OnInit {
   players:any;
   playersDataSource;
   displayedColumns = ['name', 'victory', 'defeat', 'warriors'];
-  constructor(private fb: FirebaseService) {}
+  constructor(private fb: FirebaseService, private $progressbar: ProgressBarService) {}
 
   ngOnInit() {
+    this.$progressbar.show();
     Observable
       .zip(this.fb.getBattles(), this.fb.getPlayers())
       .subscribe(this.setVictoryDefeatPlayers.bind(this));
@@ -39,6 +41,7 @@ export class RankingComponent implements OnInit {
       return player;
     });
     this.playersDataSource = new MatTableDataSource(this.players);
+    this.$progressbar.hide();
   }
 
 }

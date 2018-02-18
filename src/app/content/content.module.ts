@@ -13,6 +13,8 @@ import { BattleComponent } from '../battles/battle/battle.component';
 import { PlayerComponent } from '../battles/player/player.component';
 import { RankingComponent } from '../ranking/ranking.component';
 import { BattleformComponent } from '../battles/battleform/battleform.component';
+import { ProgressbarComponent } from '../progressbar/progressbar.component';
+import { ProgressBarService } from '../progressbar/progressbar.service';
 
 @NgModule({
   imports: [
@@ -46,7 +48,8 @@ import { BattleformComponent } from '../battles/battleform/battleform.component'
     )
   ],
   declarations: [ContentComponent, BattlesComponent, BattlesDialog, TagComponent, BattlesPipe, 
-    BattleComponent, PlayerComponent , RankingComponent, BattleformComponent], 
-  entryComponents : [BattlesDialog]
+    BattleComponent, PlayerComponent , RankingComponent, BattleformComponent, ProgressbarComponent],
+  entryComponents : [BattlesDialog],
+  providers: [ProgressBarService]
 })
 export class ContentModule { }

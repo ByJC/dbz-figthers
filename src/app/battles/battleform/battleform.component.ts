@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirebaseService } from '../../shared/firebase.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { ProgressBarService } from '../../progressbar/progressbar.service';
 
 @Component({
   selector: 'app-battleform',
@@ -28,15 +30,24 @@ export class BattleformComponent implements OnInit {
   };
   form: FormGroup;
 
-  constructor(private _fb: FormBuilder, private fb: FirebaseService, private router: Router, private ref: ChangeDetectorRef) {
+  constructor(
+    private _fb: FormBuilder,
+    private fb: FirebaseService,
+    private router: Router,
+    private ref: ChangeDetectorRef,
+    private $progressbar: ProgressBarService) {
   }
 
   ngOnInit() {
-    this.fb.getWarriors().subscribe(data => this.warriors = data);
+    this.$progressbar.show();
     this.players = this.fb.getPlayers();
-    this.players.subscribe(res => {
-      this.playersToArray = res;
-    });
+    Observable
+      .zip(this.players, this.fb.getWarriors())
+      .subscribe(([players, warriors]) => {
+        this.warriors = warriors;
+        this.playersToArray = players;
+        this.$progressbar.hide();
+      });
     this.initForm();
   }
 
