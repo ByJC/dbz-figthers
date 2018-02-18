@@ -11,7 +11,7 @@ export class FirebaseService {
      * then merge the data and id into one object
     */
     getBattles() {
-        return this.db.collection('battles').snapshotChanges().map(this.getIdData);
+        return this.db.collection('battles').snapshotChanges().map(this.getIdData).map(this.sortByDate);
     }
 
     getWarriors() {
@@ -51,6 +51,10 @@ export class FirebaseService {
             const id = a.payload.doc.id;
             return { id, ...data };
         });
+    }
+
+    sortByDate(data){
+        return data.sort((a,b) => a.date > b.date ? -1 : a.date < b.date ? 1 : 0);
     }
 
 }
