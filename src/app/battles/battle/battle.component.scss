@@ -22,3 +22,8 @@ player-item:hover {
     cursor: not-allowed;
     box-shadow: none;
 }
+@media screen and (max-width: 600px) {
+    .hour{
+        display: none;
+    }
+}
