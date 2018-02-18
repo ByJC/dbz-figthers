@@ -22,8 +22,20 @@ player-item:hover {
     cursor: not-allowed;
     box-shadow: none;
 }
+
+.mat-mini-fab{
+    width: 25px;
+    height: 25px;
+    .mat-icon{
+        height:27px;
+    }
+
+    .material-icons{
+        font-size: 15px;
+    }
+}
 @media screen and (max-width: 600px) {
-    .hour{
+    .hide-sm{
         display: none;
     }
 }

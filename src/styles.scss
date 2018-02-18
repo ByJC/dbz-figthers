@@ -78,6 +78,10 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
     font-family: 'Roboto', sans-serif;
     background-color: #EFEFEF;
   }
+  .mat-mini-fab .mat-button-wrapper {
+    padding: 0 !important;
+    line-height: 0 !important;
+  }
   
   .material-icons {
     font-weight: normal;
