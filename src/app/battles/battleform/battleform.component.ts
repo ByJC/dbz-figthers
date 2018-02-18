@@ -19,16 +19,16 @@ export class BattleformComponent implements OnInit {
     date: new Date(),
     firstPlayer: {
       name: '',
-      warriors : []
-    }, 
+      warriors: []
+    },
     secondPlayer: {
-      name:'',
-      warriors : []
+      name: '',
+      warriors: []
     }
   };
   form: FormGroup;
 
-  constructor(private _fb: FormBuilder,  private fb: FirebaseService, private router: Router,private ref: ChangeDetectorRef) {
+  constructor(private _fb: FormBuilder, private fb: FirebaseService, private router: Router, private ref: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -50,37 +50,38 @@ export class BattleformComponent implements OnInit {
 
     this.form.valueChanges
       .subscribe((data) => {
+        console.log(data);
         this.battle.firstPlayer.name = data.firstPlayerName.name;
         this.battle.firstPlayer.warriors = data.firstPlayerWarriors;
         this.battle.secondPlayer.name = data.secondPlayerName.name;
         this.battle.secondPlayer.warriors = data.secondPlayerWarriors;
       });
 
-      this.form.controls['firstPlayerName']
+    ['firstPlayer', 'secondPlayer'].map(player => {
+      this.form.controls[`${player}Name`]
         .valueChanges.subscribe(selectedValue => {
-          const playerSelected = this.playersToArray.find(player => player.name === this.form.get('firstPlayerName').value.name);
-          if(this.form.get('firstPlayerWarriors').value.length === 0) {
-            // console.log(playerSelected.warriors);
-            // this.form.controls['firstPlayerWarriors'].setValue(playerSelected.warriors, {emitModelToViewChange: true});
-            this.form.patchValue({firstPlayerWarriors : playerSelected.warriors}), {emitModelToViewChange: true};
+          const playerSelected = this.playersToArray.find(gamer => gamer.name === this.form.get(`${player}Name`).value.name);
+          if (this.form.get(`${player}Warriors`).value.length === 0) {
+            this.form.controls[`${player}Warriors`].setValue(playerSelected.warriors, { emitModelToViewChange: true });
+            // this.form.patchValue({firstPlayerWarriors : playerSelected.warriors}), {emitModelToViewChange: true};
             // this.ref.markForCheck();
             this.ref.detectChanges();
           }
-        }
-    );
+        });
+    });
   }
 
   submit() {
     this.battle.date = new Date();
     this.fb.addBattle(this.battle)
-      .then(res =>  this.router.navigate(['/battles']))
+      .then(res => this.router.navigate(['/battles']))
       .catch(error => console.error("Error writing document: ", error));
   }
 
   saveWarriorPlayer(player) {
     const playerName = this.form.get(`${player}Name`).value.name;
     const playerSelected = this.playersToArray.find(player => player.name === playerName);
-    this.fb.updatePlayer(playerSelected, { warriors : this.form.get(`${player}Warriors`).value })
+    this.fb.updatePlayer(playerSelected, { warriors: this.form.get(`${player}Warriors`).value })
       .catch(error => console.error("Error writing document: ", error));
   }
 
