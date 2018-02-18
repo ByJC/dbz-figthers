@@ -16,7 +16,7 @@ export class RankingComponent implements OnInit {
   battles:any;
   players:any;
   playersDataSource;
-  displayedColumns = ['name', 'victory', 'defeat'];
+  displayedColumns = ['name', 'victory', 'defeat', 'warriors'];
   constructor(private fb: FirebaseService) {}
 
   ngOnInit() {

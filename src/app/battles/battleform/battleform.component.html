@@ -18,6 +18,8 @@
       <mat-select class="warriors" placeholder="Warriors" formControlName="firstPlayerWarriors" multiple required>
         <mat-option *ngFor="let warrior of warriors" [value]="warrior">{{warrior.name}}</mat-option>
       </mat-select>
+
+      {{form.value.firstPlayerWarriors}}
     </div>
     <div fxFlex class="battleform-player">
       <div fxLayout fxLayoutAlign="end end" class="button-config">
@@ -42,6 +44,6 @@
   </div>
   <div class="battleform-button" fxLayout="row" fxLayoutAlign="center center">
     <button mat-button mat-raised-button (click)="cancel()">Cancel</button>
-    <button mat-button mat-raised-button color="accent" (click)="submit()">Submit</button>
+    <button mat-button mat-raised-button color="accent" (click)="submit()" [disabled]="form.invalid">Submit</button>
   </div>
 </form>

@@ -7,17 +7,23 @@
         <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
       </ng-container>
   
-      <!-- Weight Column -->
+      <!-- Victory Column -->
       <ng-container matColumnDef="victory">
         <mat-header-cell *matHeaderCellDef> Nb. of Victory </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.victory}} </mat-cell>
       </ng-container>
   
-      <!-- Symbol Column -->
+      <!-- Defeat Column -->
       <ng-container matColumnDef="defeat">
         <mat-header-cell *matHeaderCellDef> Nb. of Defeat </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.defeat}} </mat-cell>
       </ng-container>
+
+       <!-- Default Team Column -->
+       <ng-container matColumnDef="warriors">
+          <mat-header-cell *matHeaderCellDef> Default Team </mat-header-cell>
+          <mat-cell *matCellDef="let element"> <span *ngFor="let warrior of element.warriors; last as isLast">{{warrior.name}} <span *ngIf="!isLast"> - </span> </span> </mat-cell>
+        </ng-container>
   
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

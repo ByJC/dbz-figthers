@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirebaseService } from '../../shared/firebase.service';
 import { Router } from '@angular/router';
 
@@ -28,7 +28,7 @@ export class BattleformComponent implements OnInit {
   };
   form: FormGroup;
 
-  constructor(private _fb: FormBuilder,  private fb: FirebaseService, private router: Router) {
+  constructor(private _fb: FormBuilder,  private fb: FirebaseService, private router: Router,private ref: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -42,10 +42,10 @@ export class BattleformComponent implements OnInit {
 
   initForm(): void {
     this.form = this._fb.group({
-      firstPlayerName: [this.battle.firstPlayer.name],
-      firstPlayerWarriors: [this.battle.firstPlayer.warriors],
-      secondPlayerName: [this.battle.secondPlayer.name],
-      secondPlayerWarriors: [this.battle.secondPlayer.warriors],
+      firstPlayerName: ['', Validators.required],
+      firstPlayerWarriors: ['', Validators.required],
+      secondPlayerName: ['', Validators.required],
+      secondPlayerWarriors: ['', Validators.required],
     });
 
     this.form.valueChanges
@@ -59,9 +59,12 @@ export class BattleformComponent implements OnInit {
       this.form.controls['firstPlayerName']
         .valueChanges.subscribe(selectedValue => {
           const playerSelected = this.playersToArray.find(player => player.name === this.form.get('firstPlayerName').value.name);
-
           if(this.form.get('firstPlayerWarriors').value.length === 0) {
-            this.form.get('firstPlayerWarriors').setValue(playerSelected.warriors);
+            // console.log(playerSelected.warriors);
+            // this.form.controls['firstPlayerWarriors'].setValue(playerSelected.warriors, {emitModelToViewChange: true});
+            this.form.patchValue({firstPlayerWarriors : playerSelected.warriors}), {emitModelToViewChange: true};
+            // this.ref.markForCheck();
+            this.ref.detectChanges();
           }
         }
     );
