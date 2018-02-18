@@ -13,6 +13,7 @@ export class BattleformComponent implements OnInit {
 
   warriors;
   players;
+  playersToArray;
   battle = {
     isFinish: false,
     date: new Date(),
@@ -33,6 +34,9 @@ export class BattleformComponent implements OnInit {
   ngOnInit() {
     this.fb.getWarriors().subscribe(data => this.warriors = data);
     this.players = this.fb.getPlayers();
+    this.players.subscribe(res => {
+      this.playersToArray = res;
+    });
     this.initForm();
   }
 
@@ -51,12 +55,31 @@ export class BattleformComponent implements OnInit {
         this.battle.secondPlayer.name = data.secondPlayerName.name;
         this.battle.secondPlayer.warriors = data.secondPlayerWarriors;
       });
+
+      this.form.controls['firstPlayerName']
+        .valueChanges.subscribe(selectedValue => {
+          const playerSelected = this.playersToArray.find(player => player.name === this.form.get('firstPlayerName').value.name);
+
+          if(this.form.get('firstPlayerWarriors').value.length === 0) {
+            this.form.get('firstPlayerWarriors').setValue(playerSelected.warriors);
+          }
+        }
+    );
   }
 
   submit() {
     this.battle.date = new Date();
     this.fb.addBattle(this.battle)
       .then(res =>  this.router.navigate(['/battles']))
+      .catch(error => console.error("Error writing document: ", error));
+  }
+
+  saveWarriorPlayer(player) {
+    const playerName = this.form.get(`${player}Name`).value.name;
+    const playerSelected = this.playersToArray.find(player => player.name === playerName);
+    playerSelected.warriors = this.form.get(`${player}Warriors`).value;
+
+    this.fb.updatePlayer(playerSelected)
       .catch(error => console.error("Error writing document: ", error));
   }
 

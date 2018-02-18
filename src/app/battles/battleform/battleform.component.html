@@ -1,25 +1,43 @@
 <form class="person-form" [formGroup]="form" novalidate>
   <div class="battleform-container" fxLayout="row" fxLayout.xs="column">
     <div fxFlex class="battleform-player">
+      <div fxLayout fxLayoutAlign="end end" class="button-config">
+        <mat-menu #appMenu="matMenu" yPosition="above">
+          <button mat-menu-item (click)="saveWarriorPlayer('firstPlayer')">Save Config Player</button>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
+
       <mat-select placeholder="Select Player 1" formControlName="firstPlayerName" required>
         <mat-option *ngFor="let player of players | async" [value]="player">
           {{ player.name }}
         </mat-option>
       </mat-select>
-      <mat-select class="warriors" placeholder="Warriors" [formControl]="firstPlayerWarriors" multiple required>
+      <mat-select class="warriors" placeholder="Warriors" formControlName="firstPlayerWarriors" multiple required>
         <mat-option *ngFor="let warrior of warriors" [value]="warrior">{{warrior.name}}</mat-option>
       </mat-select>
     </div>
     <div fxFlex class="battleform-player">
+      <div fxLayout fxLayoutAlign="end end" class="button-config">
+        <mat-menu #appMenu="matMenu" yPosition="above">
+          <button mat-menu-item (click)="saveWarriorPlayer('firstPlayer')">Save Config Player</button>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
       <mat-select placeholder="Select Player 2" formControlName="secondPlayerName" required>
         <mat-option *ngFor="let player of players | async" [value]="player">
           {{ player.name }}
         </mat-option>
       </mat-select>
 
-      <mat-select class="warriors" placeholder="Warriors" [formControl]="secondPlayerWarriors" multiple required>
+      <mat-select class="warriors" placeholder="Warriors" formControlName="secondPlayerWarriors" multiple required>
         <mat-option *ngFor="let warrior of warriors" [value]="warrior">{{warrior.name}}</mat-option>
       </mat-select>
+
     </div>
   </div>
   <div class="battleform-button" fxLayout="row" fxLayoutAlign="center center">

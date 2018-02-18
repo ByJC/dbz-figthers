@@ -10,10 +10,17 @@
     background-color: white;
     margin: 20px;
     padding: 40px;
+    position:relative;
 }
 
 .battleform-button{
     button {
         margin:20px;
     }
+}
+
+.button-config {
+    position: absolute;
+    top:0px;
+    right:0px;
 }

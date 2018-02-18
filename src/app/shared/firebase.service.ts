@@ -11,13 +11,7 @@ export class FirebaseService {
      * then merge the data and id into one object
     */
     getBattles() {
-        return this.db.collection('battles').snapshotChanges().map(actions => {
-            return actions.map(a => {
-                const data = a.payload.doc.data();
-                const id = a.payload.doc.id;
-                return { id, ...data };
-            });
-        });
+        return this.db.collection('battles').snapshotChanges().map(this.getIdData);
     }
 
     getWarriors() {
@@ -25,7 +19,7 @@ export class FirebaseService {
     }
 
     getPlayers() {
-        return this.db.collection('players').valueChanges();
+        return this.db.collection('players').snapshotChanges().map(this.getIdData);
     }
 
     /**
@@ -44,6 +38,19 @@ export class FirebaseService {
     updateBattle(battle, updatedBattle) {
         return this.db.collection('battles').doc(battle.id)
             .update(updatedBattle);
+    }
+
+    updatePlayer(player) {
+        return this.db.collection('players').doc(player.id)
+            .update(player);
+    }
+
+    getIdData(actions) {
+        return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+        });
     }
 
 }
