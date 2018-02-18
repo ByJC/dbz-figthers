@@ -39,7 +39,6 @@ export class RankingComponent implements OnInit {
       return player;
     });
     this.playersDataSource = new MatTableDataSource(this.players);
-    console.log(this.players, this.playersDataSource);
   }
 
 }

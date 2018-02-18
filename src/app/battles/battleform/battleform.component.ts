@@ -77,9 +77,7 @@ export class BattleformComponent implements OnInit {
   saveWarriorPlayer(player) {
     const playerName = this.form.get(`${player}Name`).value.name;
     const playerSelected = this.playersToArray.find(player => player.name === playerName);
-    playerSelected.warriors = this.form.get(`${player}Warriors`).value;
-
-    this.fb.updatePlayer(playerSelected)
+    this.fb.updatePlayer(playerSelected, { warriors : this.form.get(`${player}Warriors`).value })
       .catch(error => console.error("Error writing document: ", error));
   }
 

@@ -40,9 +40,9 @@ export class FirebaseService {
             .update(updatedBattle);
     }
 
-    updatePlayer(player) {
+    updatePlayer(player, playerUpdated) {
         return this.db.collection('players').doc(player.id)
-            .update(player);
+            .update(playerUpdated);
     }
 
     getIdData(actions) {
