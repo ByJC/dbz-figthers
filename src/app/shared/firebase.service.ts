@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class FirebaseService {
 
-    constructor(private db: AngularFirestore) { }
+    constructor(private db: AngularFirestore, public snackBar: MatSnackBar) { }
 
     /** 
      * In order to update the battle document, I need to catch the id of the document using snapshotChanges()
@@ -28,21 +29,21 @@ export class FirebaseService {
      * In order to delete a battle, unused for the moment
      */
     deleteBattle(battle) {
-        return this.db.collection('battles').doc(battle.id).delete();
+        return this.db.collection('battles').doc(battle.id).delete().then(_ => this.snackBar.open('Battle deleted !','',{duration: 2000}));
     }
 
     addBattle(battle) {
-        return this.db.collection('battles').add(battle);
+        return this.db.collection('battles').add(battle).then(_ => this.snackBar.open('Battle added !','',{duration: 2000}));;
     }
 
     updateBattle(battle, updatedBattle) {
         return this.db.collection('battles').doc(battle.id)
-            .update(updatedBattle);
+            .update(updatedBattle).then(_ => this.snackBar.open('Battle updated !','',{duration: 2000}));;
     }
 
     updatePlayer(player, playerUpdated) {
         return this.db.collection('players').doc(player.id)
-            .update(playerUpdated);
+            .update(playerUpdated).then(_ => this.snackBar.open('Player updated !','',{duration: 2000}));;
     }
 
     getIdData(actions) {
