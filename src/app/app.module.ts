@@ -15,6 +15,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 const config = {
   apiKey: "AIzaSyBXAVB9ciUchzupead3EED2f5L5kLPeKW8",
   authDomain: "dbz-fighters.firebaseapp.com",
@@ -36,7 +39,8 @@ const config = {
     AuthModule,
     SharedModule,
     AngularFireModule.initializeApp(config),
-    RouterModule.forRoot(APP_ROUTES)
+    RouterModule.forRoot(APP_ROUTES),
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [AngularFirestore, AngularFireAuth],
   bootstrap: [AppComponent]
