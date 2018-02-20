@@ -5,7 +5,7 @@ import { MatModule } from '../mat.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { BattlesComponent } from '../battles/battles.component';
-import { BattlesDialog } from '../battles/battles.component';
+import { ConfirmDialog } from '../battles/battle/battle.component';
 import { TagComponent } from '../tag/tag.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BattlesPipe } from '../battles/battles.pipe';
@@ -47,9 +47,9 @@ import { ProgressBarService } from '../progressbar/progressbar.service';
     ]
     )
   ],
-  declarations: [ContentComponent, BattlesComponent, BattlesDialog, TagComponent, BattlesPipe, 
+  declarations: [ContentComponent, BattlesComponent, ConfirmDialog, TagComponent, BattlesPipe, 
     BattleComponent, PlayerComponent , RankingComponent, BattleformComponent, ProgressbarComponent],
-  entryComponents : [BattlesDialog],
+  entryComponents : [ConfirmDialog],
   providers: [ProgressBarService]
 })
 export class ContentModule { }

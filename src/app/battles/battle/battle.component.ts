@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 import { FirebaseService } from '../../shared/firebase.service';
 import { ProgressBarService } from '../../progressbar/progressbar.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'battle-item',
@@ -9,7 +10,7 @@ import { ProgressBarService } from '../../progressbar/progressbar.service';
 })
 export class BattleComponent {
   @Input() battle: any;
-  constructor(private fb: FirebaseService, private $progressbar: ProgressBarService) { }
+  constructor(private fb: FirebaseService, private $progressbar: ProgressBarService, private dialog: MatDialog) { }
 
   selectWinner(battle, player) {
     this.$progressbar.show();
@@ -30,6 +31,14 @@ export class BattleComponent {
       });
   }
 
+
+  confirmWinner(battle, player): void {
+    let dialogRef = this.dialog.open(ConfirmDialog, { data : { player, battle }});
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) { this.selectWinner(battle, player); }
+    });
+  }
+
   deleteBattle(battle) {
     this.$progressbar.show();
     this.fb.deleteBattle(battle)
@@ -42,4 +51,28 @@ export class BattleComponent {
     });
 
   }
+}
+
+@Component({
+  selector: 'app-confirm-modal',
+  templateUrl: './confirm-modal.html',
+})
+export class ConfirmDialog {
+  battle;
+  player;
+
+  constructor(public dialogRef: MatDialogRef<ConfirmDialog>, 
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.battle = data.battle;
+      this.player = data.player;
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  submit() {
+    this.dialogRef.close(true);
+  }
+
 }
