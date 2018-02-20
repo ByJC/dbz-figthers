@@ -1,31 +1,61 @@
 <div class="ranking-container">
-  <mat-table #table [dataSource]="playersDataSource">
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-      </ng-container>
-  
-      <!-- Victory Column -->
-      <ng-container matColumnDef="victory">
-        <mat-header-cell *matHeaderCellDef> Nb. of Victory </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.victory}} </mat-cell>
-      </ng-container>
-  
-      <!-- Defeat Column -->
-      <ng-container matColumnDef="defeat">
-        <mat-header-cell *matHeaderCellDef> Nb. of Defeat </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.defeat}} </mat-cell>
-      </ng-container>
+  <mat-card>
+  <mat-tab-group>
+    <mat-tab label="Player Ranking">
+      <mat-table #table [dataSource]="playersDataSource" matSort>
 
-       <!-- Default Team Column -->
-       <ng-container matColumnDef="warriors">
-          <mat-header-cell *matHeaderCellDef> Default Team </mat-header-cell>
-          <mat-cell *matCellDef="let element"> <span *ngFor="let warrior of element.warriors; last as isLast">{{warrior.name}} <span *ngIf="!isLast"> - </span> </span> </mat-cell>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  </div>
+
+        <!-- Victory Column -->
+        <ng-container matColumnDef="victory">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nb. of Victory </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.victory}} </mat-cell>
+        </ng-container>
+
+        <!-- Defeat Column -->
+        <ng-container matColumnDef="defeat">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nb. of Defeat </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.defeat}} </mat-cell>
+        </ng-container>
+
+        <!-- Default Team Column -->
+        <ng-container matColumnDef="warriors">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Default Team </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span *ngFor="let warrior of element.warriors; last as isLast">{{warrior.name}}
+              <span *ngIf="!isLast"> - </span>
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </mat-tab>
+    <mat-tab label="Warriors Count">
+      <mat-table #table [dataSource]="warriorsDataSource" matSort>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <!-- Count Column -->
+        <ng-container matColumnDef="count">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Selected times </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.count}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumnsWarriors"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsWarriors;"></mat-row>
+      </mat-table>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
+
+</div>
