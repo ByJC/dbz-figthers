@@ -96,6 +96,24 @@ export class BattleformComponent implements OnInit {
       .catch(error => console.error("Error writing document: ", error));
   }
 
+  randomizeWarriors(player) {
+    const randomize = (min, max) => parseInt(Math.random() * (max - min) + min);
+    const warriors = [];
+    const warriorsIndex = [];
+    const numberWarriors = this.warriors.length;
+
+    while (warriors.length < 3) {
+      const result = randomize(0, numberWarriors);
+
+      if (!warriorsIndex.includes(result)) {
+        warriorsIndex.push(result);
+        warriors.push(this.warriors[result]);
+      }
+    }
+
+    this.form.get(`${player}Warriors`).setValue(warriors);
+  }
+
   cancel() {
     this.router.navigate(['battles']);
   }
