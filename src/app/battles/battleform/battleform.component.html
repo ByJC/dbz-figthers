@@ -2,11 +2,11 @@
   <div class="battleform-container" fxLayout="row" fxLayout.xs="column">
     <div fxFlex class="battleform-player">
       <div fxLayout fxLayoutAlign="end end" class="button-config">
-        <mat-menu #appMenu="matMenu" yPosition="above">
+        <mat-menu #appMenu1="matMenu" yPosition="above">
           <button mat-menu-item (click)="saveWarriorPlayer('firstPlayer')">Save Config Player</button>
           <button mat-menu-item (click)="randomizeWarriors('firstPlayer')">Randomize Figtherz</button>
         </mat-menu>
-        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <button mat-icon-button [matMenuTriggerFor]="appMenu1">
           <mat-icon>more_vert</mat-icon>
         </button>
       </div>
@@ -24,11 +24,11 @@
     </div>
     <div fxFlex class="battleform-player">
       <div fxLayout fxLayoutAlign="end end" class="button-config">
-        <mat-menu #appMenu="matMenu" yPosition="above">
+        <mat-menu #appMenu2="matMenu" yPosition="above">
           <button mat-menu-item (click)="saveWarriorPlayer('secondPlayer')">Save Config Player</button>
           <button mat-menu-item (click)="randomizeWarriors('secondPlayer')">Randomize Figtherz</button>
         </mat-menu>
-        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <button mat-icon-button [matMenuTriggerFor]="appMenu2">
           <mat-icon>more_vert</mat-icon>
         </button>
       </div>

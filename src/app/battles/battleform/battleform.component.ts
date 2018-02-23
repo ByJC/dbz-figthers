@@ -73,10 +73,13 @@ export class BattleformComponent implements OnInit {
         .valueChanges.subscribe(selectedValue => {
           const playerSelected = this.playersToArray.find(gamer => gamer.name === this.form.get(`${player}Name`).value.name);
           if (this.form.get(`${player}Warriors`).value.length === 0) {
-            this.form.controls[`${player}Warriors`].setValue(playerSelected.warriors, { emitModelToViewChange: true });
+            this.setWarriorsToPlayer(player, playerSelected.warriors);
+            //FIXME : resfresh not taken into account;
+            // this.form.get(`${player}Warriors`).setValue(playerSelected.warriors, { emitModelToViewChange: true });
+            // this.form.controls[`${player}Warriors`].setValue(playerSelected.warriors, { emitModelToViewChange: true });
             // this.form.patchValue({firstPlayerWarriors : playerSelected.warriors}), {emitModelToViewChange: true};
             // this.ref.markForCheck();
-            this.ref.detectChanges();
+            // this.ref.detectChanges();
           }
         });
     });
@@ -110,7 +113,10 @@ export class BattleformComponent implements OnInit {
         warriors.push(this.warriors[result]);
       }
     }
+    this.setWarriorsToPlayer(player,warriors);
+  }
 
+  setWarriorsToPlayer(player, warriors) {
     this.form.get(`${player}Warriors`).setValue(warriors);
   }
 
