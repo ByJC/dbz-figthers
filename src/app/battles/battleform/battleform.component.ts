@@ -73,10 +73,13 @@ export class BattleformComponent implements OnInit {
         .valueChanges.subscribe(selectedValue => {
           const playerSelected = this.playersToArray.find(gamer => gamer.name === this.form.get(`${player}Name`).value.name);
           if (this.form.get(`${player}Warriors`).value.length === 0) {
-            this.form.controls[`${player}Warriors`].setValue(playerSelected.warriors, { emitModelToViewChange: true });
+            this.setWarriorsToPlayer(player, playerSelected.warriors);
+            //FIXME : resfresh not taken into account;
+            // this.form.get(`${player}Warriors`).setValue(playerSelected.warriors, { emitModelToViewChange: true });
+            // this.form.controls[`${player}Warriors`].setValue(playerSelected.warriors, { emitModelToViewChange: true });
             // this.form.patchValue({firstPlayerWarriors : playerSelected.warriors}), {emitModelToViewChange: true};
             // this.ref.markForCheck();
-            this.ref.detectChanges();
+            // this.ref.detectChanges();
           }
         });
     });
@@ -94,6 +97,27 @@ export class BattleformComponent implements OnInit {
     const playerSelected = this.playersToArray.find(player => player.name === playerName);
     this.fb.updatePlayer(playerSelected, { warriors: this.form.get(`${player}Warriors`).value })
       .catch(error => console.error("Error writing document: ", error));
+  }
+
+  randomizeWarriors(player) {
+    const randomize = (min, max) => parseInt(Math.random() * (max - min) + min);
+    const warriors = [];
+    const warriorsIndex = [];
+    const numberWarriors = this.warriors.length;
+
+    while (warriors.length < 3) {
+      const result = randomize(0, numberWarriors);
+
+      if (!warriorsIndex.includes(result)) {
+        warriorsIndex.push(result);
+        warriors.push(this.warriors[result]);
+      }
+    }
+    this.setWarriorsToPlayer(player,warriors);
+  }
+
+  setWarriorsToPlayer(player, warriors) {
+    this.form.get(`${player}Warriors`).setValue(warriors);
   }
 
   cancel() {
