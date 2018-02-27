@@ -22,10 +22,16 @@
           <mat-cell *matCellDef="let element"> {{element.defeat}} </mat-cell>
         </ng-container>
 
-        <!-- Victory Column -->
+        <!-- +/- Column -->
         <ng-container matColumnDef="diff">
           <mat-header-cell *matHeaderCellDef mat-sort-header> +/- </mat-header-cell>
           <mat-cell *matCellDef="let element" [ngClass]="{'positif': element.diff >= 0, 'negatif': element.diff < 0}"> {{element.diff}} </mat-cell>
+        </ng-container>
+
+        <!-- Ratio Column -->
+        <ng-container matColumnDef="ratio">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Ratio </mat-header-cell>
+          <mat-cell *matCellDef="let element" [ngClass]="{'positif': element.ratio >= 50, 'negatif': element.ratio < 50}"> {{element.ratio | number}} %</mat-cell>
         </ng-container>
 
         <!-- Default Team Column -->

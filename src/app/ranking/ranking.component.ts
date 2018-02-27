@@ -27,7 +27,7 @@ export class RankingComponent implements OnInit {
   warriors:Warrior[];
   playersDataSource;
   warriorsDataSource;
-  displayedColumns = ['name', 'victory', 'defeat', 'diff', 'warriors'];
+  displayedColumns = ['name', 'victory', 'defeat', 'diff', 'ratio', 'warriors'];
   displayedColumnsWarriors = ['name', 'count'];
   constructor(private fb: FirebaseService, private $progressbar: ProgressBarService) {}
 
@@ -50,6 +50,8 @@ export class RankingComponent implements OnInit {
         || (battle.secondPlayer.name === player.name && !battle.secondPlayer.winner)).length;
 
       player.diff = player.victory - player.defeat;
+
+      player.ratio = player.victory > 0 ? (player.victory / (player.victory + player.defeat)) * 100 : 0;
 
       return player;
     }).sort((a,b) => a.diff > b.diff ? -1 : a.diff < b.diff ? 1 : 0);
