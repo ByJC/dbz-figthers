@@ -54,7 +54,7 @@ export class RankingComponent implements OnInit {
       player.ratio = player.victory > 0 ? (player.victory / (player.victory + player.defeat)) * 100 : 0;
 
       return player;
-    }).sort((a,b) => a.diff > b.diff ? -1 : a.diff < b.diff ? 1 : 0);
+    }).sort(this.sortBy('diff'));
 
     this.warriors = warriors.map(warrior => {
       warrior.count = battles.reduce((cumul, battle) => {
@@ -63,11 +63,15 @@ export class RankingComponent implements OnInit {
           battle.secondPlayer.warriors.filter(warriorib => warriorib.name === warrior.name).length
       },0);
       return warrior;
-    }).sort((a,b) => a.count > b.count ? -1 : a.count < b.count ? 1 : 0);
+    }).sort(this.sortBy('count'));
 
     this.playersDataSource = new MatTableDataSource(this.players);
     this.warriorsDataSource = new MatTableDataSource(this.warriors);
     this.warriorsDataSource.sort = this.sort;
     this.$progressbar.hide();
+  }
+
+  sortBy(key) {
+    return (a,b) => a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0
   }
 }
