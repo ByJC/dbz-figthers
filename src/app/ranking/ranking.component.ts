@@ -27,7 +27,7 @@ export class RankingComponent implements OnInit {
   warriors:Warrior[];
   playersDataSource;
   warriorsDataSource;
-  displayedColumns = ['name', 'victory', 'defeat', 'warriors'];
+  displayedColumns = ['name', 'victory', 'defeat', 'diff', 'warriors'];
   displayedColumnsWarriors = ['name', 'count'];
   constructor(private fb: FirebaseService, private $progressbar: ProgressBarService) {}
 
@@ -49,8 +49,10 @@ export class RankingComponent implements OnInit {
         (battle.firstPlayer.name === player.name && !battle.firstPlayer.winner) 
         || (battle.secondPlayer.name === player.name && !battle.secondPlayer.winner)).length;
 
+      player.diff = player.victory - player.defeat;
+
       return player;
-    });
+    }).sort((a,b) => a.diff > b.diff ? -1 : a.diff < b.diff ? 1 : 0);
 
     this.warriors = warriors.map(warrior => {
       warrior.count = battles.reduce((cumul, battle) => {

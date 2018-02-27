@@ -22,6 +22,12 @@
           <mat-cell *matCellDef="let element"> {{element.defeat}} </mat-cell>
         </ng-container>
 
+        <!-- Victory Column -->
+        <ng-container matColumnDef="diff">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> +/- </mat-header-cell>
+          <mat-cell *matCellDef="let element" [ngClass]="{'positif': element.diff >= 0, 'negatif': element.diff < 0}"> {{element.diff}} </mat-cell>
+        </ng-container>
+
         <!-- Default Team Column -->
         <ng-container matColumnDef="warriors">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Default Team </mat-header-cell>
