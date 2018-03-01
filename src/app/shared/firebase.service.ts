@@ -16,11 +16,11 @@ export class FirebaseService {
     }
 
     getWarriors() {
-        return this.db.collection('warriors').valueChanges();
+        return this.db.collection('warriors').valueChanges().map(this.sortByName);
     }
 
     getPlayers() {
-        return this.db.collection('players').snapshotChanges().map(this.getIdData);
+        return this.db.collection('players').snapshotChanges().map(this.getIdData).map(this.sortByName);
     }
 
     /**
@@ -56,6 +56,10 @@ export class FirebaseService {
 
     sortByDate(data){
         return data.sort((a,b) => a.date > b.date ? -1 : a.date < b.date ? 1 : 0);
+    }
+
+    sortByName(data){
+        return data.sort((a,b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
     }
 
 }
