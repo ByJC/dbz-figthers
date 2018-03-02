@@ -1,13 +1,13 @@
 {
     "short_name": "DBFZ",
-    "name": "Dragon Ball Fighter Z - App",
+    "name": "Dragon Ball Fighter Z",
     "start_url": "/",
 
     "theme_color": "f57c00",
-    "background_color": "#ffffff",
+    "background_color": "#3f4448",
 
     "display": "standalone",
-    "orientation": "portrait",
+    "orientation": "any",
 
     "icons": [
         {
