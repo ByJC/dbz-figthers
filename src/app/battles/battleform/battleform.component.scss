@@ -24,3 +24,12 @@
     top:0px;
     right:0px;
 }
+
+@media screen and (max-width: 600px) {
+    .battleform-container {
+        padding: 4px;
+    }
+    .battleform-player{
+        margin:4px;
+    }
+}

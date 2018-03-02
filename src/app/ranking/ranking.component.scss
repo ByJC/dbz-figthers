@@ -2,6 +2,12 @@
     padding: 40px;
 }
 
+@media screen and (max-width: 600px) {
+    .ranking-container {
+        padding: 8px;
+    }
+}
+
 .positif {
     color: green;
 }
